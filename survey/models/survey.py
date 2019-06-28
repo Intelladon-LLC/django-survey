@@ -2,8 +2,8 @@
 
 from django.db import models
 from django.urls import reverse
-from django.utils.translation import ugettext_lazy as _
 from django.utils.crypto import get_random_string
+from django.utils.translation import ugettext_lazy as _
 
 
 class Survey(models.Model):
@@ -17,8 +17,12 @@ class Survey(models.Model):
     display_by_question = models.BooleanField(_("Display by question"))
     template = models.CharField(_("Template"), max_length=255, null=True, blank=True)
 
-    slug = models.SlugField(max_length=8, blank=True, )  # blank we can migrate as this model doesn't already have this
-    random_url = models.BooleanField(default=False, null=False, blank=False) # Decide if slug should be pk or random.
+    slug = models.SlugField(
+        max_length=8, blank=True
+    )  # blank we can migrate as this model doesn't already have this
+    random_url = models.BooleanField(
+        default=False, null=False, blank=False
+    )  # Decide if slug should be pk or random.
 
     class Meta(object):
         verbose_name = _("survey")
@@ -42,16 +46,17 @@ class Survey(models.Model):
         return min_
 
     def get_absolute_url(self):
-        # if self.random_url == True:
-        #     return reverse("survey-detail", kwargs={"slug": self.slug})
-        # else:
-        return reverse("survey-detail", kwargs={"id": self.pk})
+        if self.random_url:
+            return reverse("secure-survey-detail", kwargs={"id": self.slug})
+        else:
+            return reverse("survey-detail", kwargs={"id": self.pk})
+        # return reverse("survey-detail", kwargs={"id": self.pk})
 
 
 def slug_save(obj):
     """ A function to generate an 8 character slug and see if it has been used."""
     if not obj.slug:  # if there isn't a slug
-        obj.slug = get_random_string(8, '0123456789')  # create one
+        obj.slug = get_random_string(8, "0123456789")  # create one
         slug_is_wrong = True
         while slug_is_wrong:  # keep checking until we have a valid slug
             slug_is_wrong = False

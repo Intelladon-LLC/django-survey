@@ -54,6 +54,24 @@
  }
 },
 {
+ "model": "auth.user",
+ "pk": 4,
+ "fields": {
+  "password": "pbkdf2_sha256$150000$AtHcr8dkOPj1$h70TePZSnEWRlwbYPyeFVkl219L0okBSL5LNXSQntJI=",
+  "last_login": "2019-06-27T21:46:56.828Z",
+  "is_superuser": true,
+  "username": "iandenegri",
+  "first_name": "",
+  "last_name": "",
+  "email": "",
+  "is_staff": true,
+  "is_active": true,
+  "date_joined": "2019-06-27T21:46:43.235Z",
+  "groups": [],
+  "user_permissions": []
+ }
+},
+{
  "model": "survey.survey",
  "pk": 1,
  "fields": {
@@ -62,7 +80,9 @@
   "is_published": true,
   "need_logged_user": true,
   "display_by_question": false,
-  "template": ""
+  "template": "",
+  "slug": "",
+  "random_url": false
  }
 },
 {
@@ -74,7 +94,9 @@
   "is_published": true,
   "need_logged_user": false,
   "display_by_question": false,
-  "template": ""
+  "template": "",
+  "slug": "",
+  "random_url": false
  }
 },
 {
@@ -86,7 +108,23 @@
   "is_published": true,
   "need_logged_user": false,
   "display_by_question": false,
-  "template": null
+  "template": null,
+  "slug": "",
+  "random_url": false
+ }
+},
+{
+ "model": "survey.survey",
+ "pk": 4,
+ "fields": {
+  "name": "test survey",
+  "description": "testing slug",
+  "is_published": true,
+  "need_logged_user": false,
+  "display_by_question": false,
+  "template": null,
+  "slug": "39717134",
+  "random_url": false
  }
 },
 {
@@ -247,6 +285,19 @@
   "survey": 3,
   "type": "radio",
   "choices": "\u9633\u660e,\u8056\u9ece"
+ }
+},
+{
+ "model": "survey.question",
+ "pk": 11,
+ "fields": {
+  "text": "nah",
+  "order": 1,
+  "required": false,
+  "category": null,
+  "survey": 4,
+  "type": "text",
+  "choices": ""
  }
 },
 {
